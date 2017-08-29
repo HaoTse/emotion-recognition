@@ -18,9 +18,13 @@ $ sh output.sh $dir $index
 - `svm/` arff 處理後 libsvm 可以接受的類型
 - `tools/` libsvm 提供的 python 工具
 - `5fold/` `10fold/` 處理後的 test matrix 及 train matrix
-- `result/` libsvm 跑出的辨識率結果
+- `result/` 儲存 svm-predict 的結果供計算 confusion martix 使用
+- `accuracy/` libsvm 跑出的辨識率結果
 - `script/oprnSmile.sh` 將 `wav/` 中的音檔提取 feature
 - `script/convert.sh` 呼叫 `arff2svm.py` 將 arff 檔案轉成 libsvm 接受格式
 - `script/main.py` 將 `svm/` 中的檔案分為 5-fold 及 10-fold 需要的內容
 - `scale.sh`, `output.sh` 的 `$index` 對應至 `$dir/` 中的檔案名稱編號
 - `train.sh` 傳入 `scale.sh` 回傳的最佳參數
+
+## Confusion matrix
+做完實驗後得到所有數據執行 `script/confusionMatrix.py` 結果存在 `confusion matrix/` 中
