@@ -28,7 +28,7 @@ for speaker in speakers:
         fout.write(testTxt)
     with open(tenfoldPath + "/train" + speaker + ".txt", 'w') as fout:
         fout.write(trainTxt)
-"""
+
 # 5-fold
 for f in files:
     for emotion in emotions:
@@ -59,4 +59,3 @@ for i in range(5):
         fout.write(testTxt)
     with open(fivefoldPath + "/train" + str(i) + ".txt", 'w') as fout:
         fout.write(trainTxt)
-"""
