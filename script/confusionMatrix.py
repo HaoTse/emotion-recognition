@@ -24,8 +24,9 @@ for path in oriPath:
         for line in lines:
             resultLabel.append(line.split(" ")[0])
         # caculate the confusion martix
-        for x in testLabel:
-            y = resultLabel[testLabel.index(x)]
+        for i in range(len(testLabel)):
+            x = testLabel[i]
+            y = resultLabel[i]
             x_ = emotionDict[int(x)]
             y_ = emotionDict[int(y)]
             confusionMatrix[x_][y_] += 1
@@ -38,7 +39,7 @@ for path in oriPath:
             outputTxt += "%15s|" % (emotions[i])
             sum_ = sum(confusionMatrix[i])
             for j in confusionMatrix[i]:
-                accuracy = j / sum_ if sum_ != 0 else 0
+                accuracy = float(j) / sum_ if sum_ != 0 else 0
                 text = "     %3d (%.2f)" % (j, accuracy)
                 outputTxt += text + "|"
             outputTxt += "\n"
