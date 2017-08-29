@@ -1,1 +1,1 @@
-Accuracy = 100% (474/474) (classification)
+Accuracy = 100% (473/473) (classification)
