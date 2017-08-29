@@ -1,3 +1,3 @@
-svm-scale -s scale 5fold/train$1.txt > train.scale
-svm-scale -r scale 5fold/test$1.txt > test.scale
+svm-scale -s scale $1/train$2.txt > train.scale
+svm-scale -r scale $1/test$2.txt > test.scale
 python tools/grid.py train.scale
