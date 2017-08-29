@@ -17,6 +17,8 @@ for speaker in speakers:
     trainTxt = ""
     testTxt = ""
     for f in files:
+        if f[-3:] != "txt":
+            continue
         with open(svmPath + "/" + f, 'r') as fin:
             lines = fin.readlines()
         for line in lines:
@@ -31,6 +33,8 @@ for speaker in speakers:
 
 # 5-fold
 for f in files:
+    if f[-3:] != "txt":
+        continue
     for emotion in emotions:
         if emotion == f[5]:
             index = emotions.index(emotion)
