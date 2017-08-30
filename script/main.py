@@ -1,11 +1,11 @@
 import sys
 from os import listdir
+import math
 
 speakers = ["03", "08", "09", "10", "11", "12", "13", "14", "15", "16"]
 emotions = ["W", "L", "E", "A", "F", "T", "N"]
 emoFile = [[], [], [], [], [], [], []]
 sortFile = []
-maxLen = 0
 
 svmPath = "svm"
 tenfoldPath = "10fold"
@@ -32,19 +32,39 @@ for speaker in speakers:
         fout.write(trainTxt)
 
 # 5-fold
+fileCnt = 0
 for f in files:
     if f[-3:] != "txt":
         continue
+    fileCnt += 1
     for emotion in emotions:
         if emotion == f[5]:
             index = emotions.index(emotion)
             emoFile[index].append(f)
-            maxLen = len(emoFile[index]) if len(emoFile[index]) > maxLen else maxLen
             break
-for i in range(maxLen):
-    for emof in emoFile:
-        if i < len(emof):
-            sortFile.append(emof[i])
+emoLen = [len(x) for x in emoFile]
+emoPro = [int(math.floor(float(l) / 5)) for l in emoLen]
+emoRem = [int(emoLen[i] - emoPro[i] * 5) for i in range(len(emoPro))]
+emoIdx = [0] * 7
+remIdx = 0
+for i in range(5):
+    for j in range(7):
+        for k in range(emoPro[j]):
+            if emoIdx[j] >= emoLen[j]:
+                break
+            idx = emoIdx[j]
+            sortFile.append(emoFile[j][idx])
+            emoIdx[j] += 1
+    while len(sortFile) < fileCnt / 5 * (i + 1):
+        remIdx %= 7
+        if emoRem[remIdx] <= 0:
+            remIdx += 1
+            continue
+        idx = emoIdx[remIdx]
+        sortFile.append(emoFile[remIdx][idx])
+        emoIdx[remIdx] += 1
+        emoRem[remIdx] -= 1
+        remIdx += 1
 for i in range(5):
     trainTxt = ""
     testTxt = ""

@@ -31,17 +31,17 @@ for path in oriPath:
             y_ = emotionDict[int(y)]
             confusionMatrix[x_][y_] += 1
         # ouptut format
-        outputTxt = "               |"
+        outputTxt = "                        |"
         for emotion in emotions:
             outputTxt += "%15s|" % (emotion)
         outputTxt += "\n"
         for i in range(len(confusionMatrix)):
-            outputTxt += "%15s|" % (emotions[i])
             sum_ = sum(confusionMatrix[i])
+            outputTxt += "%15s(%3d/%3d)|" % (emotions[i], confusionMatrix[i][i], sum_)
             for j in confusionMatrix[i]:
                 accuracy = float(j) / sum_ if sum_ != 0 else 0
                 text = "     %3d (%.2f)" % (j, accuracy)
                 outputTxt += text + "|"
-            outputTxt += "\n"
+            outputTxt += ("\n")
         with open("confusion matrix/" + path + "/" + f, "w") as fout:
             fout.write(outputTxt)
